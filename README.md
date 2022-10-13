@@ -14,4 +14,5 @@ First commit. Muchos éxitos y con toda en este ultimo ciclo.
 # Filleral Yefreyner Mahecha Cantor
 Jamas os rindeis ante las adveridades, levanate y se aun mas fuerte, no dejes que el mundo te arraze, arraza con el mundo 
 
-
+# Carlos Diego Tobón Henao
+"No te averguences de tus fracasos, aprende de ellos y empieza de nuevo"
