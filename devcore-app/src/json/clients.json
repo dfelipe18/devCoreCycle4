@@ -1,0 +1,98 @@
+{
+  "clientes": [
+    {
+      "identificacion": "111111",
+      "apellido": "Smith",
+      "edad": "34",
+      "dirección": {
+        "calle": "21 2nd Street",
+        "ciudad": "New York",
+        "localidad": "NY",
+        "codigo postal": "10021"
+      },
+      "telefono": [
+        {
+          "tipo": "home",
+          "numero": "212 555-1234"
+        },
+        {
+          "tipo": "fax",
+          "numero": "646 555-4567"
+        }
+      ],
+      "nombre": "John",
+      "correo": "ja@prueba.com"
+    },
+    {
+      "identificacion": "22222",
+      "apellido": "Claus",
+      "edad": 25,
+      "dirección": {
+        "calle": "21 2nd Street",
+        "ciudad": "New York",
+        "localidad": "NY",
+        "codigo postal": "10021"
+      },
+      "telefono": [
+        {
+          "tipo": "home",
+          "numero": "313 555-1234"
+        },
+        {
+          "tipo": "fax",
+          "numero": "654 555-4567"
+        }
+      ],
+      "nombre": "Mario",
+      "correo": "mas@prueba.com"
+    }
+  ],
+  "administradores": [
+    {
+      "identificacion": "1231",
+      "apellido": "Moreno",
+      "edad": "30",
+      "dirección": {
+        "calle": "1 2nd Street",
+        "ciudad": "New York",
+        "localidad": "NY",
+        "codigo postal": "10021"
+      },
+      "telefono": [
+        {
+          "tipo": "home",
+          "numero": "212 444-1234"
+        },
+        {
+          "tipo": "fax",
+          "numero": "646 444-4567"
+        }
+      ],
+      "nombre": "Judy",
+      "correo": "jm@prueba.com"
+    },
+    {
+      "identificacion": "2342",
+      "apellido": "Tellez",
+      "edad": 31,
+      "dirección": {
+        "calle": "212 2nd Street",
+        "ciudad": "New York",
+        "localidad": "NY",
+        "codigo postal": "10021"
+      },
+      "telefono": [
+        {
+          "tipo": "home",
+          "numero": "313 555-1298"
+        },
+        {
+          "tipo": "fax",
+          "numero": "654 555-9876"
+        }
+      ],
+      "nombre": "Andres",
+      "correo": "at@prueba.com"
+    }
+  ]
+}
