@@ -10,7 +10,13 @@ const Home = () => {
         <AppNavBar />
       </header>
       <main id="main" className="main">
-        <h1>Bienvenidos a DevCore</h1>
+      <section class="hero">
+  <div class="content">
+    <h2>Devcore</h2>
+    <p>Busca lo que necesitas y haste con el</p>
+    </div>
+  <div class="waves"></div>
+</section>
       </main>
       <footer id="footer" className="footer">
         <p>Footer works in react!</p>

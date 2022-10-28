@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import sales from "../json/sales.json";
-
+import "../ventas.css";
 import "../App.css";
 import AppNavBar from "./page/AppNavBar";
 
@@ -71,9 +71,6 @@ export default function SalesComponent(props) {
           </div>
         </div>
       </main>
-      <footer id="footer" className="footer">
-        <p>Footer works in react!</p>
-      </footer>
     </div>
   );
 }
