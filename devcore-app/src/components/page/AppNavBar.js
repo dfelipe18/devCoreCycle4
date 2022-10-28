@@ -49,7 +49,7 @@ export default function AppNavBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/auth/home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

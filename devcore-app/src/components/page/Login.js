@@ -15,43 +15,128 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import usersJson from "../../json/clients.json";
 import { useState } from "react";
 import { Copyright } from "@mui/icons-material";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import {useNavigate} from 'react-router-dom';
 
 export default function Login(props) {
+  /** Variables globales */
   const theme = createTheme();
-  console.log(users);
   const users = usersJson;
-  
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [alertMessage, setAlertMessage] = useState({
+    message: "Hubo un problema con el correo o contraseña.",
+    type: "error",
+  });
 
-  const validateData = (email, password) => {
-    const role = "gg";
-    debugger
-    for (let i = 0, len = Object.keys(users); i < len; i++) {
-      /*const element = len[i];
-       const localizarUbicacion = (idUbicacion) => {
-        return (
-          responseData.filter((ubicacion) => ubicacion.id === idUbicacion)[0] ||
-          {}
-        );
-      }; */
-      debugger;
+
+  /** Elementos para las alertas */
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
-    return role;
+    setOpen(false);
+  };
+  /** Fin de elementos para las alertas */
+
+  /** Elementos para validar el usuario del JSON */
+  const getUserByEmailOrPassword = (prop, val, object) => {
+    return object.filter((e) => {
+      return e[prop] === val;
+    });
   };
 
-  function handleSubmit (event) {
+  const validateData = (email, password) => {
+    const keys = Object.keys(users);
+    let stateUser = false;
+    for (let i = 0, len = keys.length; i < len; i++) {
+      let objectUser = getUserByEmailOrPassword(
+        "correo",
+        email,
+        users[keys[i]]
+      );
+      if (objectUser.length >= 1) {
+        let passwordUser = getUserByEmailOrPassword(
+          "identificacion",
+          password,
+          objectUser
+        );
+        if (passwordUser.length >= 1) {
+          passwordUser[0].role = keys[i];
+          stateUser = true;
+          break;
+        }
+      }
+    }
+
+    return stateUser;
+  };
+
+  function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
-    validateData(data.get("email"), data.get("password"));
-  };
+    let stateUser = validateData(data.get("email"), data.get("password"));
+    if (stateUser) {
+      setAlertMessage({
+        message: "Usuario logueado satisfactoriamente.",
+        type: "success",
+      });
+    }
+    setOpen(true);
+    if(stateUser) {
+        navigateAuthHome();
+    }
+  }
+
+  const navigateAuthHome = () => {
+    navigate("/auth/home", {replace: true});
+  }
+  /** Fin de elementos para validar el usuario del JSON */
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
+        <Stack
+          spacing={2}
+          sx={{
+            width: "100%",
+            position: "absolute",
+            display: "flex",
+            "justify-content": "center",
+            "margin-top": "30px",
+          }}
+        >
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+              top: "0px"
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity={alertMessage.type}
+              sx={{ width: "100%" }}
+            >
+              {alertMessage.message}
+            </Alert>
+          </Snackbar>
+        </Stack>
+
         <Grid
           item
           xs={false}
