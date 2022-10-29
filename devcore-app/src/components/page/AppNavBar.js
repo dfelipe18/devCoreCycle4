@@ -16,7 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function AppNavBar() {
   const pages = [
-    { name: "Productos", url: "/authoring/products", tooltip: "Ver productos" },
+    { name: "Productos", url: "/auth/products", tooltip: "Ver productos" },
     { name: "Clientes", url: "/auth/clients", tooltip: "Ver clientes" },
     { name: "Ventas", url: "/auth/sales", tooltip: "Ver ventas" },
   ];
