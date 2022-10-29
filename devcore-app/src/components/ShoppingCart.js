@@ -39,8 +39,7 @@ const ShoppingCart = () => {
         <AppNavBar />
     </header>
     <div>
-        <h3>Carrito de compras</h3>
-        <h3>Productos</h3>
+        <h2 className="title1">Pokenmones</h2>
         <article className="box grid-responsive">
             {products.map((product) => (<ProductItem key={product.id} data={product} addToCart={addToCart} />
             ))}

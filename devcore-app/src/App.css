@@ -1,17 +1,20 @@
 :root {
     --color: #4973ff;
   }
-  .box{
-    padding:1rem;
-    margin:1rem;
-    box-shadow: 0 0 1rem #00000025 inset;
-  }
   .grid-responsive{
-    display: grid;
+    display: inline-grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    gap: 15rem;
+    padding: 8%;
+    height: 47rem;
+    width: -webkit-fill-available;
 }
-  
+  .title1 {
+    text-align: center;
+    font-size: 56px;
+    color: white;
+  }
+
   body {
     font-size: 16px;
     font-family: 'Montserrat', sans-sherif;
