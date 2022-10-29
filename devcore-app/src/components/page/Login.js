@@ -14,36 +14,36 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import usersJson from "../../json/clients.json";
 import { useState } from "react";
-import { Copyright } from "@mui/icons-material";
-import Stack from "@mui/material/Stack";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-import {useNavigate} from 'react-router-dom';
+import { Copyright, LegendToggleOutlined } from "@mui/icons-material";
+
+import { useNavigate } from "react-router-dom";
+import Notification from "./Notifications";
 
 export default function Login(props) {
   /** Variables globales */
   const theme = createTheme();
   const users = usersJson;
-  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const [alertMessage, setAlertMessage] = useState({
-    message: "Hubo un problema con el correo o contraseña.",
-    type: "error",
-  });
 
-
-  /** Elementos para las alertas */
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  /** Fucniones del nmotify */
+  const [notify, setNotify] = useState({
+    open: false,
+    type: "",
+    message: "",
   });
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+
+    setNotify({
+      ...notify,
+      open: false,
+    });
   };
-  /** Fin de elementos para las alertas */
+
+  /** Fucniones del nmotify */
 
   /** Elementos para validar el usuario del JSON */
   const getUserByEmailOrPassword = (prop, val, object) => {
@@ -55,6 +55,7 @@ export default function Login(props) {
   const validateData = (email, password) => {
     const keys = Object.keys(users);
     let stateUser = false;
+    let passwordUser = [];
     for (let i = 0, len = keys.length; i < len; i++) {
       let objectUser = getUserByEmailOrPassword(
         "correo",
@@ -62,7 +63,7 @@ export default function Login(props) {
         users[keys[i]]
       );
       if (objectUser.length >= 1) {
-        let passwordUser = getUserByEmailOrPassword(
+        passwordUser = getUserByEmailOrPassword(
           "identificacion",
           password,
           objectUser
@@ -74,68 +75,45 @@ export default function Login(props) {
         }
       }
     }
-
-    return stateUser;
+    return { stateUser: stateUser, userData: passwordUser };
   };
 
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    let stateUser = validateData(data.get("email"), data.get("password"));
-    if (stateUser) {
-      setAlertMessage({
+    let userInfo = validateData(data.get("email"), data.get("password"));
+    if (userInfo.stateUser) {
+      navigateAuthHome(userInfo.userData[0], {
         message: "Usuario logueado satisfactoriamente.",
         type: "success",
       });
-    }
-    setOpen(true);
-    if(stateUser) {
-        navigateAuthHome();
+    } else {
+      setNotify({
+        ...notify,
+        open: true,
+        type: "error",
+        message: "Hubo un problema con el correo o contraseña.",
+      });
     }
   }
 
-  const navigateAuthHome = () => {
-    navigate("/auth/home", {replace: true});
-  }
+  const navigateAuthHome = (userData, dataAlert) => {
+    navigate("/auth/home", {
+      replace: true,
+      state: {
+        userData: userData,
+        dataAlert: dataAlert,
+      },
+    });
+  };
   /** Fin de elementos para validar el usuario del JSON */
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Stack
-          spacing={2}
-          sx={{
-            width: "100%",
-            position: "absolute",
-            display: "flex",
-            "justify-content": "center",
-            "margin-top": "30px",
-          }}
-        >
-          <Snackbar
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "center",
-              top: "0px"
-            }}
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-          >
-            <Alert
-              onClose={handleClose}
-              severity={alertMessage.type}
-              sx={{ width: "100%" }}
-            >
-              {alertMessage.message}
-            </Alert>
-          </Snackbar>
-        </Stack>
+
+        <Notification notify={notify} handleClose={handleClose} />
 
         <Grid
           item
