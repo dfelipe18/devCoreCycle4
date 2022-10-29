@@ -14,7 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import StoreIcon from "@mui/icons-material/Store";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export default function AppNavBar() {
+export default function AppNavBar({userData}) {
+  console.log(userData);
   const pages = [
     { name: "Productos", url: "/authoring/products", tooltip: "Ver productos" },
     { name: "Clientes", url: "/auth/clients", tooltip: "Ver clientes" },
