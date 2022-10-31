@@ -8,5 +8,5 @@ function App() {
     <RoutesApp/>
   );
 }
-
+/** Creditos para recurso por fuera del MinTic: Emanuel Diaz Villa. */
 export default App;

@@ -14,35 +14,24 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import usersJson from "../../json/clients.json";
 import { useState } from "react";
-import { Copyright, LegendToggleOutlined } from "@mui/icons-material";
-
+import { Copyright } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import Notification from "./Notifications";
+import { useNotify } from "../../hooks/useNotify";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function Login(props) {
   /** Variables globales */
   const theme = createTheme();
   const users = usersJson;
   const navigate = useNavigate();
+  const [userAuth, setUserAuth] = useLocalStorage("user-auth", "");
 
   /** Fucniones del nmotify */
-  const [notify, setNotify] = useState({
+  const { notify, RenderNotify, onSetNotify } = useNotify({
     open: false,
     type: "",
     message: "",
   });
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setNotify({
-      ...notify,
-      open: false,
-    });
-  };
-
   /** Fucniones del nmotify */
 
   /** Elementos para validar el usuario del JSON */
@@ -88,7 +77,7 @@ export default function Login(props) {
         type: "success",
       });
     } else {
-      setNotify({
+      onSetNotify({
         ...notify,
         open: true,
         type: "error",
@@ -98,14 +87,15 @@ export default function Login(props) {
   }
 
   const navigateAuthHome = (userData, dataAlert) => {
+    setUserAuth('user-auth', userData);
     navigate("/auth/home", {
       replace: true,
       state: {
-        userData: userData,
         dataAlert: dataAlert,
       },
     });
   };
+
   /** Fin de elementos para validar el usuario del JSON */
 
   return (
@@ -113,7 +103,7 @@ export default function Login(props) {
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
 
-        <Notification notify={notify} handleClose={handleClose} />
+        <RenderNotify />
 
         <Grid
           item
