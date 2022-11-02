@@ -12,12 +12,12 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import usersJson from "../../json/clients.json";
+import usersJson from "../../utilities/json/clients.json";
 import { useState } from "react";
 import { Copyright } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useNotify } from "../../hooks/useNotify";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useNotify } from "../../utilities/hooks/useNotify";
+import { useLocalStorage } from "../../utilities/hooks/useLocalStorage";
 
 export default function Login(props) {
   /** Variables globales */

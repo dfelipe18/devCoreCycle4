@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import AppNavBar from "./page/AppNavBar";
-import productsJson from "../json/products.json";
+import productsJson from "../utilities/json/products.json";
 
 export default function SetNewProducts() {
   /** Configuraciones para los notify */

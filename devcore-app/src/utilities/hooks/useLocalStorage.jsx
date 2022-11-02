@@ -14,6 +14,7 @@ export function useLocalStorage(key, initialValue) {
     try {
       setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));
+      window.dispatchEvent(new Event('login-pass'))
     } catch (e) {
       console.log(e);
     }

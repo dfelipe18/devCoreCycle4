@@ -3,8 +3,8 @@ import "../../App.css";
 import { useLocation } from "react-router-dom";
 import AppNavBar from "./AppNavBar";
 import { useState, useEffect } from "react";
-import { useNotify } from "../../hooks/useNotify";
-import { useGetUserAuth } from "../../hooks/useGetUserAuth";
+import { useNotify } from "../../utilities/hooks/useNotify";
+import { useGetUserAuth } from "../../utilities/hooks/useGetUserAuth";
 
 const Home = () => {
   const location = useLocation();
@@ -14,12 +14,14 @@ const Home = () => {
     message: "",
   });
   useEffect(() => {
-    onSetNotify({
-      ...notify,
-      open: true,
-      type: location.state.dataAlert.type,
-      message: location.state.dataAlert.message,
-    });
+    if(location.state) {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: location.state.dataAlert.type,
+        message: location.state.dataAlert.message,
+      });
+    }
   }, [location.state]);
 
   return (

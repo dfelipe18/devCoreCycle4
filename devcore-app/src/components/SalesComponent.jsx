@@ -7,8 +7,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import sales from "../json/sales.json";
-import AppNavBar from "./page/AppNavBar";
+import sales from "../utilities/json/sales.json";
+import "../utilities/styles/SalesStyles.css";
 
 export default function SalesComponent(props) {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -31,38 +31,73 @@ export default function SalesComponent(props) {
     },
   }));
 
+  const valueSales = (initial, item) => {
+    return initial + item.valor;
+  };
+
   return (
     <div className="App">
-      <header id="header" className="header">
-        <AppNavBar />
-      </header>
       <main id="main" className="main">
-        <div className="container mt-5 align-center">
-          <h1>Lista de ventas</h1>
+        <div className="title-sales">
+          <h2>listado de ventas</h2>
+        </div>
+        <div className="container-table mt-5 align-center">
           <div className="row">
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>ID Venta</StyledTableCell>
-                    <StyledTableCell>ID Cliente</StyledTableCell>
-                    <StyledTableCell>Fecha de Venta</StyledTableCell>
-                    <StyledTableCell>Valor</StyledTableCell>
-                    <StyledTableCell>Venta confirmada</StyledTableCell>
+                    <StyledTableCell align="center">ID Cliente</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Fecha de Venta
+                    </StyledTableCell>
+                    <StyledTableCell align="center">ID Venta</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Venta confirmada
+                    </StyledTableCell>
+                    <StyledTableCell align="center">Valor</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {sales.ventas.map((item) => (
                     <StyledTableRow key={item.idVenta}>
-                      <StyledTableCell>{item.idVenta}</StyledTableCell>
-                      <StyledTableCell>{item.idCliente}</StyledTableCell>
-                      <StyledTableCell>{item.fecha}</StyledTableCell>
-                      <StyledTableCell>{item.valor}</StyledTableCell>
-                      <StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.idCliente}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.fecha}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {item.idVenta}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
                         {item.confirmado ? "Si" : "No"}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        $ {item.valor}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+          <div className="row">
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell align="center">
+                      Total de Ventas
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <StyledTableRow key="total-value">
+                    <StyledTableCell align="center">
+                      $ {sales.ventas.reduce(valueSales, 0)}
+                    </StyledTableCell>
+                  </StyledTableRow>
                 </TableBody>
               </Table>
             </TableContainer>

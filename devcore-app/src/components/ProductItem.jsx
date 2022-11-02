@@ -1,6 +1,8 @@
 import React from "react";
 import "../Product.css";
+import { useGetUserAuth } from "../utilities/hooks/useGetUserAuth";
 const ProductItem = ({data, addToCart})=> {
+    const userAuth = useGetUserAuth();
     let {id, name,price, image} = data;
     return (
       <div className="pika">
@@ -12,7 +14,7 @@ const ProductItem = ({data, addToCart})=> {
             <div className="content">
                 <h3>{name}</h3>
                 <p>{name} - ${price}.00</p>
-                <div className="buy1">
+                {userAuth.role !== undefined && userAuth.role !== "administradores" && <div className="buy1">
                     <button onClick={() => addToCart(id)} className="button">
                         <span className="button__text"> <span>b</span><span>u</span>y</span><span> </span><span>s</span><span>t</span><span>u</span><span>f</span><span>f</span>
                         <svg className="button__svg" role="presentational" viewBox="0 0 600 600">
@@ -62,7 +64,7 @@ const ProductItem = ({data, addToCart})=> {
                             </g>
                         </svg>
                     </button>
-                </div>
+                </div>}
             </div>
         </div>
     </div>
