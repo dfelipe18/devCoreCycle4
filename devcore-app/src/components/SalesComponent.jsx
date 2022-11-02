@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,8 +9,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import sales from "../utilities/json/sales.json";
 import "../utilities/styles/SalesStyles.css";
+import { DataContext } from "../utilities/hooks/DataContext";
 
 export default function SalesComponent(props) {
+
+  const {dataSales} = useContext(DataContext);
+  debugger
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -59,7 +64,7 @@ export default function SalesComponent(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {sales.ventas.map((item) => (
+                  {dataSales.map((item) => (
                     <StyledTableRow key={item.idVenta}>
                       <StyledTableCell align="center">
                         {item.idCliente}

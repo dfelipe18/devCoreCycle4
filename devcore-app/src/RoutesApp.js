@@ -18,7 +18,7 @@ const RoutesApp = () => {
         <Route path="/auth/home" element={<Home />} />
         <Route path="/auth/sales" element={<SalesComponent />} />
         <Route path="/auth/modified-products" element={<SetNewProducts />} />
-        <Route path="/auth/products" element={<ShoppingCart />}/>
+        <Route path="/auth/products" element={<ShoppingCart />} />
       </Routes>
       <footer id="footer" className="footer">
         <p>Footer works in react!</p>
