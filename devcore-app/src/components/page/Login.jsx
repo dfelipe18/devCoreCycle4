@@ -13,9 +13,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import usersJson from "../../utilities/json/clients.json";
-import { useState } from "react";
+import { useEffect } from "react";
 import { Copyright } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useNotify } from "../../utilities/hooks/useNotify";
 import { useLocalStorage } from "../../utilities/hooks/useLocalStorage";
 
@@ -32,6 +32,19 @@ export default function Login(props) {
     type: "",
     message: "",
   });
+
+  const location = useLocation();
+ 
+  useEffect(() => {
+    if(location.state) {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: location.state.dataAlert.type,
+        message: location.state.dataAlert.message,
+      });
+    }
+  }, [location.state]);
   /** Fucniones del nmotify */
 
   /** Elementos para validar el usuario del JSON */

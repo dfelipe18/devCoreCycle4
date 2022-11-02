@@ -1,14 +1,26 @@
-
 import React from "react";
-import './App.css';
+import "./App.css";
 import RoutesApp from "./RoutesApp";
 import { DataProvider } from "./utilities/hooks/DataContext";
+import { createTheme, ThemeProvider } from "@mui/material";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#d50000",
+    },
+    secondary: {
+      main: "#ef5350",
+    },
+  },
+});
 
 function App() {
   return (
     <DataProvider>
-      <RoutesApp/>
+      <ThemeProvider theme={theme}>
+        <RoutesApp />
+      </ThemeProvider>
     </DataProvider>
   );
 }

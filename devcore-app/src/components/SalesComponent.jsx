@@ -14,7 +14,6 @@ import { DataContext } from "../utilities/hooks/DataContext";
 export default function SalesComponent(props) {
 
   const {dataSales} = useContext(DataContext);
-  debugger
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

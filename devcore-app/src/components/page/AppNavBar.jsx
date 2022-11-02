@@ -13,11 +13,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import StoreIcon from "@mui/icons-material/Store";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetUserAuth } from "../../utilities/hooks/useGetUserAuth";
 import { useState, useEffect } from "react";
 import "../../utilities/styles/NavBarStyles.css";
-export default function AppNavBar({ userData, loguedd }) {
+export default function AppNavBar() {
   let pages = [
     { name: "Productos", url: "/auth/products", tooltip: "Ver productos" },
     {
@@ -35,20 +35,21 @@ export default function AppNavBar({ userData, loguedd }) {
   if (userCredentials === null || userCredentials === undefined) {
     userCredentials = {};
   }
+  const navigate = useNavigate();
   const [userAuth, setUserAuth] = useState(userCredentials);
 
   window.addEventListener("login-pass", () => {
     userCredentials = useGetUserAuth();
     setUserAuth(userCredentials);
   });
-  
+
   if (userAuth.role !== undefined && userAuth.role === "clientes") {
     userImage = process.env.PUBLIC_URL + "/images/client-two.jpg";
     pages = [
       {
         name: "Ver productos",
         url: "/auth/products",
-        tooltip: "Modificar productos",
+        tooltip: "Ver productos",
       },
     ];
   } else if (!userAuth || userAuth.role === undefined) {
@@ -57,11 +58,14 @@ export default function AppNavBar({ userData, loguedd }) {
       {
         name: messageAuth,
         url: "/",
-        tooltip: "Modificar productos",
+        tooltip: messageAuth,
       },
     ];
   }
-  const settings = ["Cuenta", "Salir"];
+  const settings = [
+    { prop: "Cuenta", action: "null" },
+    { prop: "Salir", action: "exit" },
+  ];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -79,6 +83,22 @@ export default function AppNavBar({ userData, loguedd }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const deleteLocaleSotrage = (action) => {
+    if (action === "exit") {
+      localStorage.clear();
+      setUserAuth({});
+      return navigate("/", {
+        replace: true,
+        state: {
+          dataAlert: {
+            type: "success",
+            message: "¡Gracias por visitarnos, vuelva pronto!",
+          },
+        },
+      });
+    }
   };
 
   return (
@@ -210,8 +230,11 @@ export default function AppNavBar({ userData, loguedd }) {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem
+                    key={setting.prop}
+                    onClick={() => deleteLocaleSotrage(setting.action)}
+                  >
+                    <Typography textAlign="center">{setting.prop}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
