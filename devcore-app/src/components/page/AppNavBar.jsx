@@ -13,14 +13,54 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import StoreIcon from "@mui/icons-material/Store";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-export default function AppNavBar({userData}) {
-  console.log(userData);
-  const pages = [
+import { Link } from "react-router-dom";
+import { useGetUserAuth } from "../../utilities/hooks/useGetUserAuth";
+import { useState, useEffect } from "react";
+import "../../utilities/styles/NavBarStyles.css";
+export default function AppNavBar({ userData, loguedd }) {
+  let pages = [
     { name: "Productos", url: "/auth/products", tooltip: "Ver productos" },
-    { name: "Clientes", url: "/auth/clients", tooltip: "Ver clientes" },
+    {
+      name: "Modificar productos",
+      url: "/auth/modified-products",
+      tooltip: "Modificar productos",
+    },
     { name: "Ventas", url: "/auth/sales", tooltip: "Ver ventas" },
   ];
+  let urlAuth = "/auth/home";
+  let userImage = process.env.PUBLIC_URL + "/images/avatar.jpg";
+  let messageAuth = "Inicia sessión para ver las opciones.";
+
+  let userCredentials = useGetUserAuth();
+  if (userCredentials === null || userCredentials === undefined) {
+    userCredentials = {};
+  }
+  const [userAuth, setUserAuth] = useState(userCredentials);
+
+  window.addEventListener("login-pass", () => {
+    userCredentials = useGetUserAuth();
+    setUserAuth(userCredentials);
+  });
+  
+  if (userAuth.role !== undefined && userAuth.role === "clientes") {
+    userImage = process.env.PUBLIC_URL + "/images/client-two.jpg";
+    pages = [
+      {
+        name: "Ver productos",
+        url: "/auth/products",
+        tooltip: "Modificar productos",
+      },
+    ];
+  } else if (!userAuth || userAuth.role === undefined) {
+    urlAuth = "/";
+    pages = [
+      {
+        name: messageAuth,
+        url: "/",
+        tooltip: "Modificar productos",
+      },
+    ];
+  }
   const settings = ["Cuenta", "Salir"];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,7 +73,7 @@ export default function AppNavBar({userData}) {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (e) => {
     setAnchorElNav(null);
   };
 
@@ -49,8 +89,6 @@ export default function AppNavBar({userData}) {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/auth/home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -61,7 +99,9 @@ export default function AppNavBar({userData}) {
               textDecoration: "none",
             }}
           >
-            DevCore
+            <Link className="nav-link" to={urlAuth}>
+              DevCore
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -94,13 +134,11 @@ export default function AppNavBar({userData}) {
               }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page.name}
-                  href={page.url}
-                  onClick={handleCloseNavMenu}
-                >
-                  <Typography textAlign="center" href={page.url}>
-                    {page.name}
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link className="nav-link" to={page.url}>
+                      {page.name}
+                    </Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -134,46 +172,51 @@ export default function AppNavBar({userData}) {
                 key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
-                href={page.url}
               >
-                {page.name}
+                <Link className="nav-link" to={page.url}>
+                  {page.name}
+                </Link>
               </Button>
             ))}
           </Box>
 
-          <ShoppingCartIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}
-          />
+          {userAuth.role !== undefined && userAuth.role === "clientes" && (
+            <ShoppingCartIcon
+              sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}
+            />
+          )}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Abrir opciones">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="./images/avatar.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {userAuth.role !== undefined && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Abrir opciones">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src={userImage} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
