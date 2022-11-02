@@ -6,7 +6,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15rem;
     padding: 8%;
-    height: 47rem;
+    height: 60rem;
     width: -webkit-fill-available;
 }
   .title1 {
