@@ -44,9 +44,9 @@ const ShoppingCart = () => {
             {products.map((product) => (<ProductItem key={product.id} data={product} addToCart={addToCart} />
             ))}
         </article>
-        <h3>Carrito</h3>
-        <article className="box">
-            <button onClick={clearCart}>Limpiar Carrito</button>
+        <h2 className="title1">Carrito</h2>
+        <article className="box grid-responsive">
+            <button className="custom-btn btn-6" onClick={clearCart}>Limpiar Carrito</button>
             {
                 cart.map((item, index) => <CartItem key={index} data={item} delFromCart={delFromCart} />)
             }
