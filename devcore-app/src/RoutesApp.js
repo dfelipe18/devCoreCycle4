@@ -13,13 +13,20 @@ const RoutesApp = () => {
       <header id="header" className="header">
         <AppNavBar loguedd="no-auth" />
       </header>
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route path="/auth/home" element={<Home />} />
-        <Route path="/auth/sales" element={<SalesComponent />} />
-        <Route path="/auth/modified-products" element={<SetNewProducts />} />
-        <Route path="/auth/products" element={<ShoppingCart />} />
-      </Routes>
+      <div className="App">
+        <main id="main" className="main">
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route path="/auth/home" element={<Home />} />
+            <Route path="/auth/sales" element={<SalesComponent />} />
+            <Route
+              path="/auth/modified-products"
+              element={<SetNewProducts />}
+            />
+            <Route path="/auth/products" element={<ShoppingCart />} />
+          </Routes>
+        </main>
+      </div>
       <footer id="footer" className="footer">
         <p className="footer1">Footer DevCore</p>
       </footer>

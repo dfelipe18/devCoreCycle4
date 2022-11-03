@@ -3,17 +3,12 @@
     justify-content: center;
 }
 
-.App {
-    position: absolute;
-    display: block;
-    width: 100%;
-}
-
 .container-table {
     width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 30px;
+    margin-top: 35px;
 }
 
 .title-sales h2 {
@@ -24,4 +19,5 @@
     line-height: 1;
     color: rgba(255, 255, 255, 0.9);
     margin-top: 12px;
+    text-shadow: 4px 3px 6px rgb(150 150 150);
 }

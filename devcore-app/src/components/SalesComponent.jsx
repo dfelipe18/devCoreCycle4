@@ -11,9 +11,9 @@ import sales from "../utilities/json/sales.json";
 import "../utilities/styles/SalesStyles.css";
 import { DataContext } from "../utilities/hooks/DataContext";
 
-export default function SalesComponent(props) {
+export default function SalesComponent() {
 
-  const {dataContext} = useContext(DataContext);
+  const {dataSales} = useContext(DataContext);
   
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,8 +40,7 @@ export default function SalesComponent(props) {
   };
 
   return (
-    <div className="App">
-      <div>
+      <div className="container-sales">
         <div className="title-sales">
           <h2>Listado de ventas</h2>
         </div>
@@ -63,7 +62,7 @@ export default function SalesComponent(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dataContext.salesJson.map((item) => (
+                  {dataSales.map((item) => (
                     <StyledTableRow key={item.idVenta}>
                       <StyledTableCell align="center">
                         {item.idCliente}
@@ -108,6 +107,5 @@ export default function SalesComponent(props) {
           </div>
         </div>
       </div>
-    </div>
   );
 }

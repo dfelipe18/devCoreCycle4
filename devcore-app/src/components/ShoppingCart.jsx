@@ -36,8 +36,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="App">
-      <div>
+      <>
         <h2 className="title1">Pokenmones</h2>
         <article className="box grid-responsive">
           {products.map((product) => (
@@ -59,8 +58,7 @@ const ShoppingCart = () => {
             </article>
           </div>
         )}
-      </div>
-    </div>
+      </>
   );
 };
 export default ShoppingCart;

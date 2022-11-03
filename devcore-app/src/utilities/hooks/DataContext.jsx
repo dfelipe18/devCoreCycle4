@@ -4,15 +4,16 @@ import productsJson from "../json/products.json";
 
 export const DataContext = createContext();
 
-const dataInit = { salesJson: salesJson.ventas, productsJson: productsJson.productos };
-
 export const DataProvider = ({ children }) => {
-  const [dataSales, setDataSales] = useState(dataInit);
+  const [dataSales, setDataSales] = useState(salesJson.ventas);
+  const [dataProducts, setDataProducts] = useState(productsJson.productos);
   return (
     <DataContext.Provider
       value={{
         dataSales,
         setDataSales,
+        dataProducts,
+        setDataProducts,
       }}
     >
       {children}

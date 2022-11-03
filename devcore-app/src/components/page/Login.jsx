@@ -109,7 +109,7 @@ export default function Login(props) {
   /** Fin de elementos para validar el usuario del JSON */
 
   return (
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100%" }}>
         <CssBaseline />
 
         <RenderNotify />

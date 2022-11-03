@@ -14,7 +14,7 @@ const Home = () => {
     message: "",
   });
   useEffect(() => {
-    if(location.state) {
+    if (location.state) {
       onSetNotify({
         ...notify,
         open: true,
@@ -25,18 +25,16 @@ const Home = () => {
   }, [location.state]);
 
   return (
-    <div className="App">
+    <>
       <RenderNotify />
-      <main id="main" className="main">
-        <section className="hero">
-          <div className="content">
-            <h2>DevCore</h2>
-            <p>Conectando lo que más te importa.</p>
-          </div>
-          <div className="waves"></div>
-        </section>
-      </main>
-    </div>
+      <section className="hero">
+        <div className="content">
+          <h2>DevCore</h2>
+          <p>Conectando lo que más te importa.</p>
+        </div>
+        <div className="waves"></div>
+      </section>
+    </>
   );
 };
 
