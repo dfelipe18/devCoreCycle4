@@ -4,9 +4,8 @@
 .grid-responsive {
   display: inline-grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15rem;
-  padding: 8%;
-  height: 60rem;
+  gap: 5rem;
+  padding: 6%;
   width: -webkit-fill-available;
 }
 .title1 {
@@ -67,6 +66,9 @@ body {
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); */
   transition: 500ms;
 }
+.footer1{
+  color: white;
+}
 
 .waves::before,
 .waves::after {
@@ -94,8 +96,8 @@ body {
 footer#footer {
   bottom: 0;
   width: 100%;
-  position: absolute;
-  background-color: #333;
+  position: fixed;
+  background-color:#ff1744;
 }
 
 @keyframes waves {

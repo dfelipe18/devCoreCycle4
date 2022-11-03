@@ -49,15 +49,15 @@ const ShoppingCart = () => {
           ))}
         </article>
         {userAuth.role !== undefined && userAuth.role !== "administradores" && (
-          <>
-            <h2 lassName="title1">Carrito</h2>
+          <div>
+            <h2 className="title1">Carrito</h2>
             <article className="box grid-responsive">
-              <button class="custom-btn btn-6" onClick={clearCart}>Limpiar Carrito</button>
+              <button className="custom-btn btn-6" onClick={clearCart}>Limpiar Carrito</button>
               {cart.map((item, index) => (
                 <CartItem key={index} data={item} delFromCart={delFromCart} />
               ))}
             </article>
-          </>
+          </div>
         )}
       </div>
     </div>
