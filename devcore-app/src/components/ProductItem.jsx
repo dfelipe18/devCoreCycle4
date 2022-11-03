@@ -13,7 +13,7 @@ const ProductItem = ({data, addToCart})=> {
     //                 <h3>{name}</h3>
     //                 <p>{name} - ${price}.00</p>
     //                 <div className="buy1">
-    //                 <button className="custom-btn btn-12" onClick={() => addToCart(id)}><span>siuuuu!</span><span>Comprar</span></button>
+    //                
     //                 </div>
     //             </div>
     //         </div>
@@ -31,6 +31,7 @@ const ProductItem = ({data, addToCart})=> {
             </h4>
             <p>
                 An exploration into the truck's polarising design
+                <button className="custom-btn btn-12" onClick={() => addToCart(id)}><span>siuuuu!</span><span>Comprar</span></button>
             </p>
         </div>
     </div>
