@@ -28,7 +28,7 @@ export default function AppNavBar() {
     { name: "Ventas", url: "/auth/sales", tooltip: "Ver ventas" },
   ];
   let urlAuth = "/auth/home";
-  let userImage = process.env.PUBLIC_URL + "/images/avatar.jpg";
+  let userImage = "../../utilities/images/avatar.jpg";
   let messageAuth = "Inicia sessión para ver las opciones.";
 
   let userCredentials = useGetUserAuth();
@@ -44,7 +44,7 @@ export default function AppNavBar() {
   });
 
   if (userAuth.role !== undefined && userAuth.role === "clientes") {
-    userImage = process.env.PUBLIC_URL + "/images/client-two.jpg";
+    userImage = "../../utilities/images/client-two.jpg";
     pages = [
       {
         name: "Ver productos",
