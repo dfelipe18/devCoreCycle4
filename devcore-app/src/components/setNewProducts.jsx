@@ -34,6 +34,8 @@ export default function SetNewProducts() {
     type: "",
     message: "",
   });
+  const prefixId = "GGOEAFKA0";
+  const [numberIncrement, setNumberIncrement] = useState(87599);
   /** End Configuraciones para los notify */
   const { dataProducts, setDataProducts } = useContext(DataContext);
   let newDataProducts = dataProducts;
@@ -47,47 +49,97 @@ export default function SetNewProducts() {
   });
 
   const [actionsProducts, setActionsProducts] = useState({
-    title: "Modificar productos",
+    title: "Actualizar producto",
     titleButton: "Actualizar",
-    msgNotification:
+    msgBadNotification:
       "No se pudo actualizar el producto, asegurese de diligenciar bien el formulario.",
+    msgFullNotification: "Producto actualizado correctamente.",
+    label: "Editar productos",
   });
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    if (checked) {
+      setActionsProducts({
+        title: "Actualizar producto",
+        titleButton: "Actualizar",
+        msgBadNotification:
+          "No se pudo actualizar el producto, asegurese de diligenciar bien el formulario.",
+        msgFullNotification: "Producto actualizado correctamente.",
+        label: "Editar productos",
+      });
+    } else {
+      setActionsProducts({
+        title: "Agregar nuevo producto",
+        titleButton: "Crear",
+        msgBadNotification:
+          "No se pudo crear el producto, asegurese de diligenciar bien el formulario.",
+        msgFullNotification: "Producto creado correctamente.",
+        label: "Crear productos",
+      });
+    }
+    setProductData({
+      id: "",
+      urlImagen: "",
+      name: "",
+      description: "",
+      price: "",
+      quantity: "",
+    });
+  };
 
   const onSubmitForm = (e) => {
     e.preventDefault();
     const dataForm = new FormData(e.currentTarget);
+
     validateDataForm(
       dataForm.get("id"),
       dataForm.get("name"),
       dataForm.get("description"),
       dataForm.get("price"),
       dataForm.get("quantity"),
-      dataForm.get("urlImage")
+      dataForm.get("urlImagen")
     );
   };
 
   const validateDataForm = (id, name, desc, price, quant, url) => {
-    let typeNoty = "success",
-      msgNoty = "Producto agregado correctamente.",
+    let typeNoty = "error",
+      msgNoty = actionsProducts.msgBadNotification,
       data = {};
     if (
-      id !== "" &&
       name !== "" &&
       desc !== "" &&
       price !== "" &&
       quant !== "" &&
       url !== ""
     ) {
-      const obj = newDataProducts.find((p) => p.id === id);
-      obj.name = name;
-      obj.description = desc;
-      obj.price = price;
-      obj.quantity = parseFloat(quant);
-      obj.urlImage = url;
+      if (!checked && id !== "") {
+        const obj = newDataProducts.find((p) => p.id === id);
+        obj.name = name;
+        obj.description = desc;
+        obj.price = price;
+        obj.quantity = parseFloat(quant);
+        obj.urlImagen = url;
+        typeNoty = "success";
+        msgNoty = actionsProducts.msgFullNotification;
+      } else if (checked && id === "") {
+        let increment = numberIncrement + 1;
+        data = {
+          id: prefixId + increment.toString(),
+          name: name,
+          description: desc,
+          price: price,
+          quantity: parseFloat(quant),
+          urlImagen: url,
+        };
+        setNumberIncrement(increment);
+        newDataProducts.push(data);
+        typeNoty = "success";
+        msgNoty = actionsProducts.msgFullNotification;
+      }
       setDataProducts(newDataProducts);
-    } else {
-      typeNoty = "error";
-      msgNoty = actionsProducts.msgNotification;
     }
 
     onSetNotify({
@@ -95,6 +147,14 @@ export default function SetNewProducts() {
       open: true,
       type: typeNoty,
       message: msgNoty,
+    });
+    setProductData({
+      id: "",
+      urlImagen: "",
+      name: "",
+      description: "",
+      price: "",
+      quantity: "",
     });
   };
 
@@ -123,7 +183,7 @@ export default function SetNewProducts() {
       case "quantity":
         quantity = event.currentTarget.value;
         break;
-      case "urlImage":
+      case "urlImagen":
         urlImagen = event.currentTarget.value;
         break;
     }
@@ -141,47 +201,49 @@ export default function SetNewProducts() {
   return (
     <>
       <RenderNotify />
-      <div className="container-list mt-5 list-items">
-        <List
-          sx={{
-            width: "100%",
-            maxWidth: 360,
-            bgcolor: "#fafafa",
-            height: "100%",
-            "padding-top": "0px",
-            "padding-bottom": "0px",
-          }}
-        >
-          {dataProducts.map((product) => (
-            <div key={product.id}>
-              <ListItemButton
-                alignItems="flex-start"
-                onClick={(event) => getItemSelected(event, product)}
-              >
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={product.urlImagen} />
-                </ListItemAvatar>
-                <Tooltip
-                  title={
-                    <>
-                      <Typography color="inherit">{product.name}</Typography>
-                      <em>{product.description}</em>
-                    </>
-                  }
-                  placement="right"
+      {!checked && (
+        <div className="container-list mt-5 list-items">
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: 360,
+              bgcolor: "#fafafa",
+              height: "100%",
+              "padding-top": "0px",
+              "padding-bottom": "0px",
+            }}
+          >
+            {dataProducts.map((product) => (
+              <div key={product.id}>
+                <ListItemButton
+                  alignItems="flex-start"
+                  onClick={(event) => getItemSelected(event, product)}
                 >
-                  <ListItemText
-                    className="text-product-item"
-                    primary={product.name}
-                    secondary={product.description}
-                  />
-                </Tooltip>
-              </ListItemButton>
-              <Divider variant="inset" component="li" />
-            </div>
-          ))}
-        </List>
-      </div>
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={product.urlImagen} />
+                  </ListItemAvatar>
+                  <Tooltip
+                    title={
+                      <>
+                        <Typography color="inherit">{product.name}</Typography>
+                        <em>{product.description}</em>
+                      </>
+                    }
+                    placement="right"
+                  >
+                    <ListItemText
+                      className="text-product-item"
+                      primary={product.name}
+                      secondary={product.description}
+                    />
+                  </Tooltip>
+                </ListItemButton>
+                <Divider variant="inset" component="li" />
+              </div>
+            ))}
+          </List>
+        </div>
+      )}
       <div className="table-items">
         <div className="container-title-page">
           <h2>Gestionar productos</h2>
@@ -288,9 +350,9 @@ export default function SetNewProducts() {
                 <TextField
                   margin="normal"
                   sx={{ width: "100%" }}
-                  id="urlImage"
+                  id="urlImagen"
                   label="URL de imagen"
-                  name="urlImage"
+                  name="urlImagen"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -309,7 +371,10 @@ export default function SetNewProducts() {
                   "justify-content": "space-between;",
                 }}
               >
-                <FormControlLabel control={<Switch name="action" />} label="Label" />
+                <FormControlLabel
+                  control={<Switch checked={checked} onChange={handleChange} />}
+                  label={actionsProducts.label}
+                />
                 <Button type="submit" variant="contained" color="secondary">
                   {actionsProducts.titleButton}
                 </Button>
