@@ -21,7 +21,7 @@ const RoutesApp = () => {
         <Route path="/auth/products" element={<ShoppingCart />} />
       </Routes>
       <footer id="footer" className="footer">
-        <p>Footer works in react!</p>
+        <p className="footer1">Footer DevCore</p>
       </footer>
     </>
   );
