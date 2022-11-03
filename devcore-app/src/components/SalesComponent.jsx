@@ -13,8 +13,8 @@ import { DataContext } from "../utilities/hooks/DataContext";
 
 export default function SalesComponent(props) {
 
-  const {dataSales} = useContext(DataContext);
-
+  const {dataContext} = useContext(DataContext);
+  
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -41,9 +41,9 @@ export default function SalesComponent(props) {
 
   return (
     <div className="App">
-      <main id="main" className="main">
+      <div>
         <div className="title-sales">
-          <h2>listado de ventas</h2>
+          <h2>Listado de ventas</h2>
         </div>
         <div className="container-table mt-5 align-center">
           <div className="row">
@@ -63,7 +63,7 @@ export default function SalesComponent(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dataSales.map((item) => (
+                  {dataContext.salesJson.map((item) => (
                     <StyledTableRow key={item.idVenta}>
                       <StyledTableCell align="center">
                         {item.idCliente}
@@ -107,7 +107,7 @@ export default function SalesComponent(props) {
             </TableContainer>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

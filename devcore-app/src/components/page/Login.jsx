@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import usersJson from "../../utilities/json/clients.json";
 import { useEffect } from "react";
 import { Copyright } from "@mui/icons-material";
@@ -20,8 +19,6 @@ import { useNotify } from "../../utilities/hooks/useNotify";
 import { useLocalStorage } from "../../utilities/hooks/useLocalStorage";
 
 export default function Login(props) {
-  /** Variables globales */
-  const theme = createTheme();
   const users = usersJson;
   const navigate = useNavigate();
   const [userAuth, setUserAuth] = useLocalStorage("user-auth", "");
@@ -112,7 +109,6 @@ export default function Login(props) {
   /** Fin de elementos para validar el usuario del JSON */
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
 
@@ -185,6 +181,7 @@ export default function Login(props) {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                color="secondary"
               >
                 Sign In
               </Button>
@@ -205,6 +202,5 @@ export default function Login(props) {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
   );
 }

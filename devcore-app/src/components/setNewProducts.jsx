@@ -14,10 +14,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useNotify } from "../utilities/hooks/useNotify";
 
 export default function SetNewProducts() {
   /** Configuraciones para los notify */
-
+  const { notify, RenderNotify, onSetNotify } = useNotify({
+    open: false,
+    type: "",
+    message: "",
+  });
   /** End Configuraciones para los notify */
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -29,7 +34,6 @@ export default function SetNewProducts() {
       dataForm.get("quantity"),
       dataForm.get("urlImage")
     );
-    debugger;
   };
 
   const validateDataForm = (name, desc, price, quant, url) => {
@@ -40,6 +44,12 @@ export default function SetNewProducts() {
       quant !== "" &&
       url !== ""
     ) {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: "success",
+        message: "Producto agregado correctamente.",
+      });
       return {
         name: name,
         description: desc,
@@ -47,11 +57,19 @@ export default function SetNewProducts() {
         quantity: parseFloat(quant),
         urlImage: url,
       };
+    } else {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: "error",
+        message: "No se pudo agregar el producto, valide los campos.",
+      });
     }
   };
 
   return (
     <div className="App">
+      <RenderNotify />
       <main id="main" className="main">
         <div className="container-table mt-5 align-center">
           <Grid
@@ -60,7 +78,6 @@ export default function SetNewProducts() {
             sx={{ height: "100vh" }}
             class="container-form"
           >
-            {/* <RenderNotify /> */}
             <Box
               sx={{
                 my: 8,

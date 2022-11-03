@@ -7,21 +7,21 @@ import { createTheme, ThemeProvider } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#d50000",
+      main: "#ec407a",
     },
     secondary: {
-      main: "#ef5350",
+      main: "#ff1744",
     },
   },
 });
 
 function App() {
   return (
-    <DataProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <DataProvider>
         <RoutesApp />
-      </ThemeProvider>
-    </DataProvider>
+      </DataProvider>
+    </ThemeProvider>
   );
 }
 /** Creditos para recurso por fuera del MinTic: Emanuel Diaz Villa. */
