@@ -1,21 +1,20 @@
 import { useReducer } from "react";
 import { useState, useContext } from "react";
+import "../Product.css";
 import {
   shoppingInitialState,
   shoppingReducer,
 } from "../reducers/shoppingReducer";
-import React from "react";
-import ProductItem from "./ProductItem";
+import * as React from "react";
 import "../App.css";
 import AppNavBar from "./page/AppNavBar";
-import CartItem from "./CartItem";
 import { TYPES } from "../actions/shoppingActions";
 import { useGetUserAuth } from "../utilities/hooks/useGetUserAuth";
 import { DataContext } from "../utilities/hooks/DataContext";
+import "../Cart.css";
 
 const ShoppingCart = () => {
   const {dataCart, setDataCart, dataProducts, setDataProducts} = useContext(DataContext);
-  consolelog(dataProducts)
   const userAuth = useGetUserAuth();
   const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
 
@@ -40,19 +39,33 @@ const ShoppingCart = () => {
   };
 
   return (
-      <>
-        <h2 className="title1">Pokenmones</h2>
+      <div>
+        <h2 className="title1">Productos suculentos</h2>
         <article className="box grid-responsive">
-          {products.map((product) => (
-            <ProductItem
-              key={product.id}
-              data={product}
-              addToCart={addToCart}
-            />
-          ))
-          }
+        {dataProducts.map((item) => (
+               <div className="container">
+     <div className="card">
+         <div className="card-header">
+             <img src={item.urlImagen} alt="rover" />
+         </div>
+         <div className="card-body">
+             <span className="tag tag-teal"> {item.name}</span>
+             <h4>
+             {item.id}
+             $ {item.price}
+             $ {item.features}
+             $ {item.quantity}
+             </h4>
+             <p>
+             {item.description}
+                 <button color="secondary"><span>siuuuu!</span><span>Comprar</span></button> 
+             </p>
+         </div>
+     </div>
+</div>
+                  ))}
         </article>
-        {userAuth.role !== undefined && userAuth.role !== "administradores" && (
+        {/* {userAuth.role !== undefined && userAuth.role !== "administradores" && (
           <div>
             <h2 className="title1">Carrito</h2>
             <article className="box grid-responsive">
@@ -62,8 +75,8 @@ const ShoppingCart = () => {
               ))}
             </article>
           </div>
-        )}
-      </>
+        )} */}
+      </div>
   );
 };
 export default ShoppingCart;
