@@ -1,5 +1,5 @@
 .container-form {
-  background-color:#fafafa;
+  background-color: #fafafa;
   box-shadow: 6px 4px 19px -3px rgb(0 0 0 / 88%);
   border-radius: 4px;
   padding: 16px;
@@ -18,7 +18,8 @@
   align-items: center;
 }
 
-.text-product-item span, .text-product-item p {
+.text-product-item span,
+.text-product-item p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,4 +35,14 @@
   color: rgba(255, 255, 255, 0.9);
   margin-top: 12px;
   text-shadow: 4px 3px 6px rgb(150 150 150);
+}
+
+.container-modified-products {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.list-products {
+  overflow: auto;
 }

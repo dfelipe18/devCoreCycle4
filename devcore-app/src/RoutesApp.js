@@ -5,8 +5,8 @@ import Home from "./components/page/Home";
 import Login from "./components/page/Login";
 import SalesComponent from "./components/SalesComponent";
 import SetNewProducts from "./components/setNewProducts";
+import ProductsList from "./components/ProductsList";
 import ShoppingCart from "./components/ShoppingCart";
-import Carrito from "./components/Carrito";
 
 const RoutesApp = () => {
   return (
@@ -24,8 +24,8 @@ const RoutesApp = () => {
               path="/auth/modified-products"
               element={<SetNewProducts />}
             />
-            <Route path="/auth/products" element={<ShoppingCart />} />
-            <Route path="/auth/carrito" element={<Carrito />} />
+            <Route path="/auth/products" element={<ProductsList />} />
+            <Route path="/auth/shopping-cart" element={<ShoppingCart />} />
           </Routes>
         </main>
       </div>

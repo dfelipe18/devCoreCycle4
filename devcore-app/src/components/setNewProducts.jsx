@@ -199,11 +199,12 @@ export default function SetNewProducts() {
   };
 
   return (
-    <>
+    <div className="container-modified-products">
       <RenderNotify />
       {!checked && (
         <div className="container-list mt-5 list-items">
           <List
+          className="list-products"
             sx={{
               width: "100%",
               maxWidth: 360,
@@ -383,6 +384,6 @@ export default function SetNewProducts() {
           </Box>
         </Grid>
       </div>
-    </>
+    </div>
   );
 }

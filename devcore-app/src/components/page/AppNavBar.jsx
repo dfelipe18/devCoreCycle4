@@ -51,11 +51,6 @@ export default function AppNavBar() {
         url: "/auth/products",
         tooltip: "Ver productos",
       },
-      {
-        name:"Carrito",
-        url: "/auth/carrito",
-        tooltip: "Carrito",
-      }
     ];
   } else if (!userAuth || userAuth.role === undefined) {
     urlAuth = "/";
@@ -206,9 +201,18 @@ export default function AppNavBar() {
           </Box>
 
           {userAuth.role !== undefined && userAuth.role === "clientes" && (
-            <ShoppingCartIcon
-              sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}
-            />
+            <Tooltip title="Ver carrito">
+              <IconButton
+                sx={{ mr: 2 }}
+                color="inherit"
+                component={Link}
+                to="/auth/shopping-cart"
+              >
+                <ShoppingCartIcon
+                  sx={{ display: { xs: "none", md: "flex" } }}
+                />
+              </IconButton>
+            </Tooltip>
           )}
 
           {userAuth.role !== undefined && (
