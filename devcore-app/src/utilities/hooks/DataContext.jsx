@@ -7,6 +7,7 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
   const [dataSales, setDataSales] = useState(salesJson.ventas);
   const [dataProducts, setDataProducts] = useState(productsJson.productos);
+  const [dataCart, setDataCart]= useState({});
   return (
     <DataContext.Provider
       value={{
@@ -14,6 +15,8 @@ export const DataProvider = ({ children }) => {
         setDataSales,
         dataProducts,
         setDataProducts,
+        dataCart,
+        setDataCart,
       }}
     >
       {children}

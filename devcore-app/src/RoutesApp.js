@@ -6,6 +6,7 @@ import Login from "./components/page/Login";
 import SalesComponent from "./components/SalesComponent";
 import SetNewProducts from "./components/setNewProducts";
 import ShoppingCart from "./components/ShoppingCart";
+import Carrito from "./components/Carrito";
 
 const RoutesApp = () => {
   return (
@@ -24,6 +25,7 @@ const RoutesApp = () => {
               element={<SetNewProducts />}
             />
             <Route path="/auth/products" element={<ShoppingCart />} />
+            <Route path="/auth/carrito" element={<Carrito />} />
           </Routes>
         </main>
       </div>

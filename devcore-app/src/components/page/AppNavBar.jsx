@@ -51,6 +51,11 @@ export default function AppNavBar() {
         url: "/auth/products",
         tooltip: "Ver productos",
       },
+      {
+        name:"Carrito",
+        url: "/auth/carrito",
+        tooltip: "Carrito",
+      }
     ];
   } else if (!userAuth || userAuth.role === undefined) {
     urlAuth = "/";
