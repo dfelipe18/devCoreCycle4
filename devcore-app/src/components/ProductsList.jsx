@@ -2,6 +2,7 @@ import * as React from "react";
 import { useContext } from "react";
 import { DataContext } from "../utilities/hooks/DataContext";
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -14,6 +15,7 @@ import {
 import "../utilities/styles/ProductsList.css";
 import { useGetUserAuth } from "../utilities/hooks/useGetUserAuth";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProductsList() {
   const { dataProducts, setDataCart } = useContext(DataContext);
@@ -29,9 +31,16 @@ export default function ProductsList() {
         <h2>Lista de productos</h2>
       </div>
       <div className="container-list-products">
-        <Grid container spacing={2} >
+        <Grid container spacing={2}>
           {dataProducts.map((product) => (
-            <Grid key={product.id} item xs={6} md={4} lg={3} className="grid-container-card">
+            <Grid
+              key={product.id}
+              item
+              xs={6}
+              md={4}
+              lg={3}
+              className="grid-container-card"
+            >
               <Card className="card-item-product" sx={{ maxWidth: 345 }}>
                 <CardMedia
                   component="img"
@@ -45,6 +54,7 @@ export default function ProductsList() {
                     gutterBottom
                     variant="h5"
                     component="div"
+                    sx={{ fontWeight: "bold" }}
                   >
                     {product.name}
                   </Typography>
@@ -57,10 +67,22 @@ export default function ProductsList() {
                   </Typography>
                 </CardContent>
                 {userAuth.role !== undefined && userAuth.role === "clientes" && (
-                  <CardActions sx={{ "justify-content": "center" }}>
-                    <Button variant="contained" size="small">
-                      Ver producto
-                    </Button>
+                  <CardActions sx={{ "justify-content": "space-between" }}>
+                    <Box sx={{ fontWeight: "bold", fontSize: "h6.fontSize" }}>
+                      $ {product.price}{" "}
+                    </Box>
+                    <Link
+                      className="nav-link"
+                      to={`/auth/info-product/${product.id}`}
+                    >
+                      <Button
+                        sx={{ "line-height": "26px" }}
+                        variant="contained"
+                        size="small"
+                      >
+                        Ver producto
+                      </Button>
+                    </Link>
                   </CardActions>
                 )}
               </Card>

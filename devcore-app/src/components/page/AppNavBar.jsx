@@ -17,11 +17,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetUserAuth } from "../../utilities/hooks/useGetUserAuth";
 import { useState, useEffect } from "react";
 import "../../utilities/styles/NavBarStyles.css";
+import { Badge } from "@mui/material";
 export default function AppNavBar() {
   let pages = [
     { name: "Productos", url: "/auth/products", tooltip: "Ver productos" },
     {
-      name: "Modificar productos",
+      name: "Gestionar productos",
       url: "/auth/modified-products",
       tooltip: "Modificar productos",
     },
@@ -208,9 +209,11 @@ export default function AppNavBar() {
                 component={Link}
                 to="/auth/shopping-cart"
               >
-                <ShoppingCartIcon
-                  sx={{ display: { xs: "none", md: "flex" } }}
-                />
+                <Badge badgeContent={4} color="blueBtn">
+                  <ShoppingCartIcon
+                    sx={{ display: { xs: "none", md: "flex" } }}
+                  />
+                </Badge>
               </IconButton>
             </Tooltip>
           )}

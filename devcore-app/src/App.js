@@ -12,6 +12,9 @@ const theme = createTheme({
     secondary: {
       main: "#ec407a",
     },
+    blueBtn: {
+      main: "#2196f3",
+    }
   },
 });
 

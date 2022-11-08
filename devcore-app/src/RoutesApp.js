@@ -7,6 +7,7 @@ import SalesComponent from "./components/SalesComponent";
 import SetNewProducts from "./components/setNewProducts";
 import ProductsList from "./components/ProductsList";
 import ShoppingCart from "./components/ShoppingCart";
+import ShowInfoProduct from "./components/ShowInfoProduct";
 
 const RoutesApp = () => {
   return (
@@ -26,6 +27,7 @@ const RoutesApp = () => {
             />
             <Route path="/auth/products" element={<ProductsList />} />
             <Route path="/auth/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/auth/info-product/:productId" element={<ShowInfoProduct />} />
           </Routes>
         </main>
       </div>
