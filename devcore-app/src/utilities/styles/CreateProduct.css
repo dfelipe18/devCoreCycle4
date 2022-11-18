@@ -40,7 +40,7 @@
 .container-modified-products {
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 93vh;
 }
 
 .list-products {

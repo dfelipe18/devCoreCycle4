@@ -6,6 +6,14 @@
   height: 100%;
   align-items: center;
 }
+.card-image {
+  height: 185px;
+  width: 100%;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
 a.nav-link {
   color: white;
@@ -35,10 +43,14 @@ a.nav-link {
 }
 
 .container-list-products .card-item-product {
-  height: 325px;
+  height: 370px;
   width: 345px;
   margin: 10px;
   box-shadow: 3px 4px 11px 1px rgb(0 0 0 / 75%);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .container-list-products .card-item-product .container-content-card {

@@ -103,10 +103,10 @@ export default function AppNavBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="nav">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <StoreIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <StoreIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "white" }} />
           <Typography
             variant="h6"
             noWrap
@@ -166,7 +166,7 @@ export default function AppNavBar() {
             </Menu>
           </Box>
 
-          <StoreIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <StoreIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1, color: "white"}} />
 
           <Typography
             variant="h5"
@@ -211,7 +211,7 @@ export default function AppNavBar() {
               >
                 <Badge badgeContent={4} color="blueBtn">
                   <ShoppingCartIcon
-                    sx={{ display: { xs: "none", md: "flex" } }}
+                    sx={{ display: { xs: "none", md: "flex", color: "white" } }}
                   />
                 </Badge>
               </IconButton>

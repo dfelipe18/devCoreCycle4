@@ -18,7 +18,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProductsList() {
-  const { dataProducts, setDataCart } = useContext(DataContext);
+  const { dataProducts } = useContext(DataContext);
   let userCredentials = useGetUserAuth();
   if (userCredentials === null || userCredentials === undefined) {
     userCredentials = {};
@@ -42,12 +42,10 @@ export default function ProductsList() {
               className="grid-container-card"
             >
               <Card className="card-item-product" sx={{ maxWidth: 345 }}>
-                <CardMedia
-                  component="img"
-                  alt={product.name}
-                  height="140"
-                  image={product.urlImagen}
-                />
+                <div
+                  className="card-image"
+                  style={{ backgroundImage: `url("${product.urlImagen}")` }}
+                ></div>
                 <CardContent className="container-content-card">
                   <Typography
                     className="element-card-name"
@@ -67,7 +65,7 @@ export default function ProductsList() {
                   </Typography>
                 </CardContent>
                 {userAuth.role !== undefined && userAuth.role === "clientes" && (
-                  <CardActions sx={{ "justify-content": "space-between" }}>
+                  <CardActions sx={{ "justify-content": "space-around" }}>
                     <Box sx={{ fontWeight: "bold", fontSize: "h6.fontSize" }}>
                       $ {product.price}{" "}
                     </Box>
