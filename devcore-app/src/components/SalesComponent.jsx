@@ -46,8 +46,8 @@ export default function SalesComponent() {
         </div>
         <div className="container-table mt-5 align-center">
           <div className="row">
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableContainer component={Paper} sx={{ "max-height": "66vh"}}>
+              <Table stickyHeader sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                   <TableRow>
                     <StyledTableCell align="center">ID Cliente</StyledTableCell>

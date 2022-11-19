@@ -27,13 +27,10 @@ const Home = () => {
   return (
     <>
       <RenderNotify />
-      <section className="hero">
         <div className="content">
           <h2>DevCore</h2>
           <p>Conectando lo que más te importa.</p>
         </div>
-        <div className="waves"></div>
-      </section>
     </>
   );
 };

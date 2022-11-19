@@ -1,36 +1,39 @@
 .container-sales {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    flex-direction: column;
-    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  background-image: url("../images/fondo4.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 93vh;
 }
 
 .title-sales {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .title-sales h2 {
-    position: relative;
-    z-index: 1;
-    font-size: 2.5rem;
-    margin: 0 0 10px;
-    line-height: 1;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 12px;
-    text-shadow: 4px 3px 6px rgb(150 150 150);
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  margin: 0 0 10px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 12px;
+  text-shadow: 4px 3px 6px rgb(150 150 150);
 }
 
 .container-table {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-    margin-top: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .container-table .row {
-    margin-right: 40px;
-    margin-left: 40px;
+  margin-right: 40px;
+  margin-left: 40px;
 }

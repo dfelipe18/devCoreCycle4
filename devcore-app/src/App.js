@@ -7,13 +7,16 @@ import { createTheme, ThemeProvider } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ff1744",
+      main: "#836564",
     },
     secondary: {
-      main: "#ec407a",
+      main: "#5f4849",
     },
     blueBtn: {
       main: "#2196f3",
+    },
+    nav: {
+      main: "#35282b",
     }
   },
 });

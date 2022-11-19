@@ -16,7 +16,6 @@ const RoutesApp = () => {
         <AppNavBar loguedd="no-auth" />
       </header>
       <div className="App">
-        <main id="main" className="main">
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route path="/auth/home" element={<Home />} />
@@ -29,7 +28,6 @@ const RoutesApp = () => {
             <Route path="/auth/shopping-cart" element={<ShoppingCart />} />
             <Route path="/auth/info-product/:productId" element={<ShowInfoProduct />} />
           </Routes>
-        </main>
       </div>
       <footer id="footer" className="footer">
         <p className="footer1">Footer DevCore</p>

@@ -17,6 +17,7 @@ import { Copyright } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotify } from "../../utilities/hooks/useNotify";
 import { useLocalStorage } from "../../utilities/hooks/useLocalStorage";
+import "../../utilities/styles/Login.css";
 
 export default function Login(props) {
   const users = usersJson;
@@ -109,7 +110,7 @@ export default function Login(props) {
   /** Fin de elementos para validar el usuario del JSON */
 
   return (
-      <Grid container component="main" sx={{ height: "100%" }}>
+      <Grid container component="main" className="container-login">
         <CssBaseline />
 
         <RenderNotify />
@@ -130,7 +131,7 @@ export default function Login(props) {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid className="container-inputs" item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,

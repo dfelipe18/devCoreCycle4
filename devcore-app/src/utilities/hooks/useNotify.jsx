@@ -31,17 +31,6 @@ export const useNotify = (notifyParams = {}) => {
     });
   };
 
-  /* const deletePropNotify = () => {
-    const obj = Object.values(notify).filter(object => object !== open);
-    console.log(obj);
-    setNotify({
-      ...notify,
-      obj
-    });
-  }
-
-  deletePropNotify() */
-
   const RenderNotify = () => {
     return (
       <Stack
