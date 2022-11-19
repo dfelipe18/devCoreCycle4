@@ -1,9 +1,9 @@
-import Sales from "../models/sales,js";
+import Sales from "../models/sales.js";
 import fs from "fs-extra";
 
 //------------------
 
-export const getSales = async (req, res) => {
+export const getSale = async (req, res) => {
   try {
     const sales = await Sales.find();
     res.send(sales);
@@ -18,20 +18,9 @@ export const getSales = async (req, res) => {
 export const createSales = async (req, res) => {
   try {
     const { name, description, price, quantity } = req.body;
-    let urlImage = null;
-
-    if(req.files.urlImage){
-      const fileUpload = await uploadImage(req.files.urlImage.tempFilePath)
-      await fs.remove(req.files.urlImage.tempFilePath)
-      urlImage = { 
-        url: fileUpload.secure_url,
-        public_id: fileUpload.public_id
-      }
-    }
-
-    const newproduct = new product({ name, description, price, urlImage, quantity });
-    await newproduct.save();
-    return res.json(newproduct);
+    const newsale = new Sales({ name, description, price, urlImage, quantity });
+    await newsale.save();
+    return res.json(newsale);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -39,30 +28,30 @@ export const createSales = async (req, res) => {
 
 //------------------
 
-export const updateProducts = async (req, res) => {
+export const updateSales = async (req, res) => {
   try {
-    const updatedProduct = await product.findByIdAndUpdate(
+    const updateSales = await Sales.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, }
     );
-    return res.send(updatedProduct);
+    return res.send(updateSales);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
   
 };
 
-export const deleteProducts = async (req, res) => {
+export const deleteSales = async (req, res) => {
   try {
-    const productRemoved = await product.findByIdAndDelete(req.params.id);
+    const salesRemoved = await Sales.findByIdAndDelete(req.params.id);
 
-    if (!productRemoved) {
+    if (!salesRemoved) {
       return res.sendStatus(404);
     } else {
 
-      if (productRemoved.urlImage.public_id) {
-        await deleteImage(productRemoved.urlImage.public_id);
+      if (salesRemoved.urlImage.public_id) {
+        await deleteImage(salesRemoved.urlImage.public_id);
       }
       return res.sendStatus(204);
     }
@@ -71,12 +60,12 @@ export const deleteProducts = async (req, res) => {
   }
 };
 
-export const getProduct = async (req, res) => {
-  const product = await product.findById(req.params.id);
+export const getSales = async (req, res) => {
+  const sales = await Sales.findById(req.params.id);
 
-  if (!product) {
+  if (!sales) {
     return res.sendStatus(404);
   } else {
-    return res.json(product);
+    return res.json(sales);
   }
 };
