@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import sales from "../utilities/json/sales.json";
 import "../utilities/styles/SalesStyles.css";
 import { DataContext } from "../utilities/hooks/DataContext";
 
@@ -98,7 +97,7 @@ export default function SalesComponent() {
                 <TableBody>
                   <StyledTableRow key="total-value">
                     <StyledTableCell align="center">
-                      $ {sales.ventas.reduce(valueSales, 0)}
+                      $ {dataSales.reduce(valueSales, 0)}
                     </StyledTableCell>
                   </StyledTableRow>
                 </TableBody>

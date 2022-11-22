@@ -15,18 +15,39 @@ import {
 import "../utilities/styles/ProductsList.css";
 import { useGetUserAuth } from "../utilities/hooks/useGetUserAuth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useNotify } from "../utilities/hooks/useNotify";
 
 export default function ProductsList() {
   const { dataProducts } = useContext(DataContext);
+  const location = useLocation();
   let userCredentials = useGetUserAuth();
   if (userCredentials === null || userCredentials === undefined) {
     userCredentials = {};
   }
   const [userAuth, setUserAuth] = useState(userCredentials);
+  const { notify, RenderNotify, onSetNotify } = useNotify({
+    open: false,
+    type: "",
+    message: "",
+  });
+  
+  useEffect(() => {
+    if (location.state) {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: location.state.dataAlert.type,
+        message: location.state.dataAlert.message,
+      });
+    }
+  }, [location.state]);
+
 
   return (
     <div className="container-general">
+      <RenderNotify />
       <div className="container-title">
         <h2>Lista de productos</h2>
       </div>

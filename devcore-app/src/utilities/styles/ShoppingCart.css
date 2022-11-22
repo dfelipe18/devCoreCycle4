@@ -1,0 +1,141 @@
+.container-title-cart h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  margin: 0 0 10px;
+  line-height: 1;
+  margin-top: 12px;
+  text-shadow: 4px 3px 6px rgb(150 150 150);
+}
+
+.container-cart {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 93vh;
+  overflow: hidden;
+}
+
+.container-info-products {
+  width: 65%;
+  height: 80%;
+  background-color: #fafafa;
+  box-shadow: 6px 4px 19px -3px rgb(0 0 0 / 88%);
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-title-cart {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.container-content-products, .container-content-products-empty {
+  display: flex;
+  flex: 8;
+  margin: 10px 0 0;
+  border-top: 1px solid #e6e6e6;
+  padding: 10px 10px 0 10px;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.container-content-products-empty {
+    justify-content: center;
+    align-items: center;
+}
+
+.container-buttons-actions {
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+  margin-top: 12px;
+}
+
+.container-total-text {
+    display: flex;
+    align-items: center;
+}
+
+.container-element-product {
+    height: 190px;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #e6e6e6;
+    margin: 0 0 5px 0;
+    background-color: #eeeeee66;
+    border-radius: 5px;
+}
+
+.container-image-product {
+    padding: 13px;
+    width: 24%;
+}
+
+.container-data-product {
+    margin-top: 5px;
+    width: 76%;
+}
+
+.element-desc {
+    height: 65px;
+    overflow: auto;
+    text-align: justify;
+    margin: 11px 0;
+    padding: 0 5px 0 0;
+}
+
+.element-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0 0 0;
+}
+
+.product-price {
+    display: flex;
+    flex: 1;
+    padding: 0 20px;
+}
+
+.product-quantity {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    align-items: end;
+    padding: 0 20px;
+}
+
+.item-text {
+    margin-top: 4px;
+}
+
+.element-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.product-name {
+    width: 90%;
+}
+
+.product-btn {
+    padding: 0 16px;
+    width: 10%;
+    display: flex;
+    justify-content: end;
+}
+
+img.image-product {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #70707091;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}

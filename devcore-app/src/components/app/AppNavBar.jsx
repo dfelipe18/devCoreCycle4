@@ -18,6 +18,10 @@ import { useGetUserAuth } from "../../utilities/hooks/useGetUserAuth";
 import { useState, useEffect } from "react";
 import "../../utilities/styles/NavBarStyles.css";
 import { Badge } from "@mui/material";
+import { useContext } from "react";
+import { DataContext } from "../../utilities/hooks/DataContext";
+import clientImage from "../../utilities/images/client-two.jpg";
+import adminImage from "../../utilities/images/avatar.jpg";
 export default function AppNavBar() {
   let pages = [
     { name: "Productos", url: "/auth/products", tooltip: "Ver productos" },
@@ -29,8 +33,8 @@ export default function AppNavBar() {
     { name: "Ventas", url: "/auth/sales", tooltip: "Ver ventas" },
   ];
   let urlAuth = "/auth/home";
-  let userImage = "../../utilities/images/avatar.jpg";
   let messageAuth = "Inicia sessión para ver las opciones.";
+  const { dataCart } = useContext(DataContext);
 
   let userCredentials = useGetUserAuth();
   if (userCredentials === null || userCredentials === undefined) {
@@ -45,7 +49,6 @@ export default function AppNavBar() {
   });
 
   if (userAuth.role !== undefined && userAuth.role === "clientes") {
-    userImage = "../../utilities/images/client-two.jpg";
     pages = [
       {
         name: "Ver productos",
@@ -209,7 +212,7 @@ export default function AppNavBar() {
                 component={Link}
                 to="/auth/shopping-cart"
               >
-                <Badge badgeContent={4} color="blueBtn">
+                <Badge badgeContent={dataCart.length} color="blueBtn">
                   <ShoppingCartIcon
                     sx={{ display: { xs: "none", md: "flex", color: "white" } }}
                   />
@@ -222,7 +225,7 @@ export default function AppNavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Abrir opciones">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={userImage} />
+                  <Avatar alt="User image" src={userAuth.role === "clientes" ? clientImage : adminImage} />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -1,5 +1,6 @@
 .container-login {
   height: 93vh;
+  overflow: hidden;
 }
 
 .container-inputs {

@@ -35,10 +35,19 @@ export default function ShowInfoProduct() {
   const { titleModal, messageModal } = dialog;
   const [btnAction, setBtnAction] = useState("buyProduct");
   let val = 0;
-  const { dataProducts, dataSales, setDataSales } = useContext(DataContext);
+  const {
+    dataProducts,
+    dataSales,
+    setDataSales,
+    dataCart,
+    setDataCart,
+  } = useContext(DataContext);
   const navigate = useNavigate();
   let newDataSales = dataSales;
-  const [numberIncrement, setNumberIncrement] = useState(parseFloat(newDataSales[newDataSales.length - 1].idVenta));
+  let newDataCart = dataCart;
+  const [numberIncrement, setNumberIncrement] = useState(
+    parseFloat(newDataSales[newDataSales.length - 1].idVenta)
+  );
 
   useEffect(() => {
     getProductById(productId);
@@ -49,7 +58,7 @@ export default function ShowInfoProduct() {
     type: "",
     message: "",
   });
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -116,39 +125,19 @@ export default function ShowInfoProduct() {
         type: "error",
         message: "No hay suficientes productos en inventario.",
       });
-    } else if (quantity <= productInfo.quantity && btnAction === "buyProduct") {
-      onSetNotify({
-        ...notify,
-        open: true,
-        type: "success",
-        message: "Producto comprado satisfactoriamente.",
-      });
-      let increment = numberIncrement + 1;
-      let valueParsed = parseFloat(productInfo.price) * quantity;
-      newDataSales.push({
-        fecha: formatDate(new Date()),
-        idCliente: userCredentials.identificacion,
-        idVenta: increment,
-        valor: parseFloat(valueParsed).toFixed(2),
-        confirmado: true,
-        detalleCompra: [
-          {
-            idProducto: productId,
-            cantidad: quantity,
-          },
-        ],
-      });
-      setNumberIncrement(increment);
-      setDataSales(newDataSales);
+    } else if (quantity <= productInfo.quantity && btnAction === "buyProduct" && quantity > 0) {
+      onBuyProduct();
     } else if (
       quantity <= productInfo.quantity &&
-      btnAction === "addProductToCart"
+      btnAction === "addProductToCart" && quantity > 0
     ) {
+      onAddToCart();
+    } else if(quantity === 0) {
       onSetNotify({
         ...notify,
         open: true,
-        type: "success",
-        message: "Producto añadido al carrito satisfactoriamente.",
+        type: "error",
+        message: "Para comprar este producto, debe digitar al menos 1 o más cantidades.",
       });
     }
     setOpen(false);
@@ -164,6 +153,79 @@ export default function ShowInfoProduct() {
 
   const padTo2Digits = (num) => {
     return num.toString().padStart(2, "0");
+  };
+
+  const valueSale = () => {
+    let valueParsed = parseFloat(productInfo.price) * quantity;
+    return parseFloat(parseFloat(valueParsed).toFixed(2));
+  };
+
+  const onBuyProduct = () => {
+    let increment = numberIncrement + 1;
+    newDataSales.unshift({
+      fecha: formatDate(new Date()),
+      idCliente: userCredentials.identificacion,
+      idVenta: increment,
+      valor: valueSale(),
+      confirmado: true,
+      detalleCompra: [
+        {
+          idProducto: productId,
+          cantidad: quantity,
+        },
+      ],
+    });
+    setNumberIncrement(increment);
+    setDataSales(newDataSales);
+    navigateAuthHome({
+      message: "Producto comprado satisfactoriamente.",
+      type: "success",
+    });
+  };
+
+  const onAddToCart = () => {
+    let responseCart = validateCartProduct();
+    if (!responseCart) {
+      newDataCart.unshift({
+        id: productId,
+        quantity: quantity,
+      });
+
+      setDataCart(newDataCart);
+
+      navigateAuthHome({
+        message: "Producto añadido al carrito satisfactoriamente.",
+        type: "success",
+      });
+    } else {
+      onSetNotify({
+        ...notify,
+        open: true,
+        type: "error",
+        message: "Este producto ya fue agregado al carrito.",
+      });
+    }
+  };
+
+  const navigateAuthHome = (dataAlert) => {
+    navigate("/auth/products", {
+      replace: true,
+      state: {
+        dataAlert: dataAlert,
+      },
+    });
+  };
+
+  const validateCartProduct = () => {
+    let boolId = false;
+    /** Buscamos si existe el mimso producto en el carrito */
+    let objFound = newDataCart.filter((e) => {
+      return e["id"] === productId;
+    });
+    if (objFound.length > 0) {
+      boolId = true;
+    }
+    return boolId;
   };
 
   return (
