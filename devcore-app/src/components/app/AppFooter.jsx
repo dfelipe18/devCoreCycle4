@@ -4,8 +4,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Logo1 from "../../utilities/images/Logo1.png";
-import Logo2 from "../../utilities/images/Logo2.png";
-import Logo3 from "../../utilities/images/Logo3.png";
 import LogoRel from "../../utilities/images/relicon.png";
 import "../../utilities/styles/Footer.css";
 
@@ -14,12 +12,11 @@ export default function AppFooter() {
     <div className="footer-devcore">
       <div className="container-top">
         <div className="container-left">
-          <p className="text-lema">No se requiere tarjeta de crédito.</p>
-          <h1 className="text-title">DevCore App</h1>
-          <p className="text-desc">
-            Diseñamos una plataforma dónde puedas encontrar todo aquello que
-            estás buscando.
-          </p>
+          <img
+            className="image-logo-footer-two"
+            src={LogoRel}
+            alt="logo-footer-image"
+          />
         </div>
         <div className="container-right container-right-image">
           <img
@@ -32,11 +29,11 @@ export default function AppFooter() {
       <div className="container-bottom">
         <div className="container-left">
           <div className="container-image-logo">
-            <img
-              className="image-logo-footer-two"
-              src={LogoRel}
-              alt="logo-footer-image"
-            />
+            <h1 className="text-title">DevCore App</h1>
+            <p className="text-desc">
+              Diseñamos una plataforma dónde puedas encontrar todo aquello que
+              estás buscando.
+            </p>
           </div>
           <div className="container-text">
             <p className="text-lema-two">
@@ -67,10 +64,10 @@ export default function AppFooter() {
               <li>soporte@devcore.com.co</li>
             </ul>
             <div className="container-icons">
-              <FacebookIcon sx={{margin: "0 16px 0 0"}} fontSize="medium" />
-              <LinkedInIcon sx={{margin: "0 16px 0 0"}} fontSize="medium" />
-              <TwitterIcon sx={{margin: "0 16px 0 0"}} fontSize="medium" />
-              <InstagramIcon sx={{margin: "0 16px 0 0"}} fontSize="medium" />
+              <FacebookIcon sx={{ margin: "0 16px 0 0" }} fontSize="medium" />
+              <LinkedInIcon sx={{ margin: "0 16px 0 0" }} fontSize="medium" />
+              <TwitterIcon sx={{ margin: "0 16px 0 0" }} fontSize="medium" />
+              <InstagramIcon sx={{ margin: "0 16px 0 0" }} fontSize="medium" />
             </div>
           </div>
         </div>

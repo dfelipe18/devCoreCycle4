@@ -34,10 +34,10 @@ img.image-logo-footer-one {
   align-items: center;
 }
 
-p.text-lema,
 h1.text-title,
 p.text-desc {
   margin: 5px 0;
+  text-align: center;
 }
 
 .container-bottom {
@@ -70,5 +70,5 @@ li {
 }
 
 .container-items-two {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
